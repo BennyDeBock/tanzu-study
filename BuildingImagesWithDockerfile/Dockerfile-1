@@ -1,0 +1,9 @@
+FROM golang
+LABEL maintainer="me@example.com"
+WORKDIR /workspace
+COPY . .
+RUN go install
+RUN apt-get update
+RUN apt-get install tini
+ENTRYPOINT [ "hello", "-g", "--", "sh", "-c", "hello \"${0} ${*}\"" ]
+CMD [ "world" ]
